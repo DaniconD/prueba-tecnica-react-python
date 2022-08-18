@@ -34,7 +34,10 @@ function CommunitiesForm({ community, communityHandler }) {
           </Styled.LeftFields>
           <Styled.RightFields>
             <img src={image ? URL.createObjectURL(image) : NoImage} alt="img" />
-            <InputButton type="file" name="image" accept="image/png, image/gif, image/jpeg" onChange={e => setImage(e.target.files[0])} />
+            <Styled.ImageLabel>
+              <InputButton type="file" name="image" accept="image/png, image/gif, image/jpeg" onChange={e => setImage(e.target.files[0])} />
+              SELECT IMAGE
+            </Styled.ImageLabel>
           </Styled.RightFields>
         </Styled.FieldsContainer>
         <Styled.Field>

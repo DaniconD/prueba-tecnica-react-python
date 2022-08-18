@@ -83,23 +83,26 @@ export const RightFields = styled.div`
   img {
     box-shadow: 1px 5px 10px #4b4b4b;
     height: auto;
+    margin-bottom: 20px;
     width: 80%;
   }
 `;
 
-export const Submit = styled.input`
-  align-self: flex-end;
-
+export const ImageLabel = styled.label`
   background-color: #e69e32;
   border: none;
   border-radius: 5px;
   color: #f7f7f7;
   cursor: pointer;
   font-size: 14px;
+  font-weight: 400;
   margin-right: 20px;
-  padding: 6px;
+  padding: 8px;
   &:active {
     opacity: 0.5;
   }
-`;
 
+  input[type="file"] {
+    display: none;
+  }
+`;

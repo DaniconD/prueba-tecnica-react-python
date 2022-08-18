@@ -12,8 +12,9 @@ export const Input = styled.input`
   border-radius: 5px;
   color: #f7f7f7;
   cursor: pointer;
-  font-size: 18px;
-  padding: 5px;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px;
   &:active {
     opacity: 0.5;
   }
