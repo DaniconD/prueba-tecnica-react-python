@@ -87,20 +87,6 @@ export const RightFields = styled.div`
   }
 `;
 
-export const Button = styled.button`
-background-color: #e69e32;
-  border: none;
-  border-radius: 5px;
-  color: #f7f7f7;
-  cursor: pointer;
-  font-size: 14px;
-  margin-top: 20px;
-  padding: 6px;
-  &:active {
-    opacity: 0.5;
-  }
-`;
-
 export const Submit = styled.input`
   align-self: flex-end;
 

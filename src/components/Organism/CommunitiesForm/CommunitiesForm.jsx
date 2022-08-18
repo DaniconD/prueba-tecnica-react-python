@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import InputButton from '../../Atoms/InputButton';
 
 import NoImage from '../../../assets/no-picture-available.jpg'
 import * as Styled from './CommunitiesForm.styled'
@@ -33,7 +34,7 @@ function CommunitiesForm({ community, communityHandler }) {
           </Styled.LeftFields>
           <Styled.RightFields>
             <img src={image ? URL.createObjectURL(image) : NoImage} alt="img" />
-            <input type="file" name="image" accept="image/png, image/gif, image/jpeg" onChange={e => setImage(e.target.files[0])} />
+            <InputButton type="file" name="image" accept="image/png, image/gif, image/jpeg" onChange={e => setImage(e.target.files[0])} />
           </Styled.RightFields>
         </Styled.FieldsContainer>
         <Styled.Field>
@@ -44,7 +45,7 @@ function CommunitiesForm({ community, communityHandler }) {
           <label>Description</label>
           <textarea name="description" id="description" cols="30" rows="10"></textarea>
         </Styled.Field>
-        <Styled.Submit type="submit" value="Submit" />
+        <InputButton type="submit" value="SUBMIT" style={{ marginRight: '15px' }} />
       </Styled.Form>
     </Styled.Container>
   )
