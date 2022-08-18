@@ -18,7 +18,7 @@ function App() {
   return (
     <Styled.Container>
       <CommunitiesList deleteComunity={deleteComunity} communityHandler={communityHandler}/>
-      <CommunitiesForm community={community} />
+      <CommunitiesForm community={community} communityHandler={communityHandler} />
     </Styled.Container>
   );
 }
