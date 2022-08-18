@@ -1,12 +1,25 @@
-import './App.css';
+import React, { useState } from 'react';
+import * as Styled from './App.styled'
 
-import Communities from '../Organism/Communities';
+import CommunitiesList from '../Organism/CommunitiesList';
+import CommunitiesForm from '../Organism/CommunitiesForm';
 
 function App() {
+  const [community, setCommunity] = useState('');
+
+  const communityHandler = (value) => {
+    setCommunity(value)
+  }
+
+  const deleteComunity = () => {
+    setCommunity('')
+  }
+
   return (
-    <div className="App">
-      <Communities />
-    </div>
+    <Styled.Container>
+      <CommunitiesList deleteComunity={deleteComunity} communityHandler={communityHandler}/>
+      <CommunitiesForm community={community} />
+    </Styled.Container>
   );
 }
 

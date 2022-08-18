@@ -8,10 +8,15 @@ export const Container = styled.div`
   border: 2px solid #e9e9e9;
   border-radius: 15px;
   box-shadow: 1px 5px 10px #4b4b4b;
-  height: 800px;
+  height: 90vh;
   margin: 20px 5%;
   padding-bottom: 40px;
   width: 30%;
+  
+  @media (max-width: 800px) {
+    width: 80%;
+    margin: 20px 10px;
+  }
 `;
 
 export const Header = styled.div`
@@ -19,6 +24,7 @@ export const Header = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
 
   max-height: 20%;
   padding: 10px 20px;
