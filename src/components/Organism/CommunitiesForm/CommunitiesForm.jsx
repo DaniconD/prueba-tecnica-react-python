@@ -74,9 +74,9 @@ function CommunitiesForm({ currentCommunity, action }) {
         </Styled.Field>
         <Styled.Field area >
           <label>Description</label>
-          <textarea name="description" id="description" cols="30" rows="10" value={community.description} onChange={(e) => setCommunity({...community, description: e.target.value})} ></textarea>
+          <textarea name="description" id="description" cols="80" rows="20" value={community.description} onChange={(e) => setCommunity({...community, description: e.target.value})} ></textarea>
         </Styled.Field>
-        <InputButton type="submit" value={action === 'submit' ? 'SUBMIT' : 'EDIT'} style={{ marginRight: '15px' }} />
+        <InputButton type="submit" value={action === 'submit' ? 'SUBMIT' : 'EDIT'} style={{ marginRight: '100px' }} />
       </Styled.Form>
     </Styled.Container>
   )

@@ -15,6 +15,7 @@ export const Input = styled.input`
   font-size: 14px;
   font-weight: 500;
   padding: 8px;
+  white-space: nowrap;
   &:active {
     opacity: 0.5;
   }

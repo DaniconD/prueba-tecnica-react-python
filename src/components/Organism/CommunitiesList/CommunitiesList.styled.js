@@ -9,11 +9,11 @@ export const Container = styled.div`
   border-radius: 15px;
   box-shadow: 1px 5px 10px #4b4b4b;
   height: 90vh;
-  margin: 20px 5%;
+  margin: 20px 2%;
   padding-bottom: 40px;
-  width: 30%;
+  width: 36%;
   
-  @media (max-width: 800px) {
+  @media (max-width: 860px) {
     width: 80%;
     margin: 20px 10px;
   }
@@ -30,5 +30,7 @@ export const Header = styled.div`
   padding: 10px 20px;
 `;
 
-
-
+export const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+`

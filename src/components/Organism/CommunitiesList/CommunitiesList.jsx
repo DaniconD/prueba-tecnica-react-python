@@ -42,10 +42,10 @@ const List = ({ communities, handleDelete, communityHandler }) => {
   return communities.map((item, index) =>
     <ListElement key={index}>
       <b>{item.name}</b>
-      <div>
+      <Styled.ButtonContainer>
         <Button look='delete' onClick={() => item.id && handleDelete(item.id)} ><IoMdClose /></Button>
         <Button look='show' onClick={() => communityHandler(index)} ><MdFileCopy /></Button>
-      </div>
+      </Styled.ButtonContainer>
     </ListElement>
   )
 }
