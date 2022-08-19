@@ -4,25 +4,47 @@ import InputButton from '../../Atoms/InputButton';
 import NoImage from '../../../assets/no-picture-available.jpg'
 import * as Styled from './CommunitiesForm.styled'
 
-function CommunitiesForm({ currentCommunity, updateComunity }) {
+import * as CommunityServer from '../../../data/CommunityServer'
+
+function CommunitiesForm({ currentCommunity, action }) {
+  const blankFields = {
+    name: '',
+    category: '',
+    parent_community: '',
+    short_description: '',
+    description: '',
+  }
   const [community, setCommunity] = useState(currentCommunity);
   const [image, setImage] = useState(null);
 
-  const handleSubmit = (e) => {
-    console.log('Form submited')
-    e.preventDefault();
+  const handleSubmit = async (e) => {
+    try {
+      let res;
+      res = await CommunityServer.registerCommunity(community);
+      const data = await res.json();
+      if(data.message === 'Success') {
+        setCommunity(blankFields);
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
-    updateComunity(community);
+  const handleEdit = async (e) => {
+    try {
+      await CommunityServer.updateCommunity(community.id, community);
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   useEffect(() => {
     setCommunity(currentCommunity);
-    console.log('Updated')
   },[currentCommunity])
 
   return (
     <Styled.Container>
-      <Styled.Form action="" onSubmit={handleSubmit}>
+      <Styled.Form onSubmit={action === 'submit' ? handleSubmit : handleEdit}>
         <Styled.FieldsContainer>
           <Styled.LeftFields>
             <Styled.Field>
@@ -54,7 +76,7 @@ function CommunitiesForm({ currentCommunity, updateComunity }) {
           <label>Description</label>
           <textarea name="description" id="description" cols="30" rows="10" value={community.description} onChange={(e) => setCommunity({...community, description: e.target.value})} ></textarea>
         </Styled.Field>
-        <InputButton type="submit" value="SUBMIT" style={{ marginRight: '15px' }} />
+        <InputButton type="submit" value={action === 'submit' ? 'SUBMIT' : 'EDIT'} style={{ marginRight: '15px' }} />
       </Styled.Form>
     </Styled.Container>
   )

@@ -7,7 +7,15 @@ import { IoMdClose, IoMdAdd } from 'react-icons/io'
 import { MdFileCopy } from 'react-icons/md'
 import * as Styled from './CommunitiesList.styled'
 
-function CommunitiesList({ communities, resetForm, deleteComunity, communityHandler }) {
+import * as CommunityServer from '../../../data/CommunityServer'
+
+function CommunitiesList({ communities, resetForm, serverList, communityHandler }) {
+  
+  const handleDelete = async (communityId) => {
+    await CommunityServer.deleteCommunity(communityId);
+    serverList();
+  }
+
   return (
     <Styled.Container>
       <Styled.Header>
@@ -23,19 +31,19 @@ function CommunitiesList({ communities, resetForm, deleteComunity, communityHand
             <b>Add a community...</b>
           </ListElement> 
           : 
-          <List communities={communities} deleteComunity={deleteComunity} communityHandler={communityHandler} />
+          <List communities={communities} handleDelete={handleDelete} communityHandler={communityHandler} />
         }
       </ListCard>
     </Styled.Container>
   )
 }
 
-const List = ({ communities, deleteComunity, communityHandler }) => {
+const List = ({ communities, handleDelete, communityHandler }) => {
   return communities.map((item, index) =>
     <ListElement key={index}>
       <b>{item.name}</b>
       <div>
-        <Button look='delete' onClick={() => deleteComunity(index)} ><IoMdClose /></Button>
+        <Button look='delete' onClick={() => item.id && handleDelete(item.id)} ><IoMdClose /></Button>
         <Button look='show' onClick={() => communityHandler(index)} ><MdFileCopy /></Button>
       </div>
     </ListElement>

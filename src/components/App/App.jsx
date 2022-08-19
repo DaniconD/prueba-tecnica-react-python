@@ -1,29 +1,35 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as Styled from './App.styled'
 
 import CommunitiesList from '../Organism/CommunitiesList';
 import CommunitiesForm from '../Organism/CommunitiesForm';
 
-function App() {
-  const [communities, setcommunities] = useState([
-    {
-      name: 'Instituto Tecnologico de Ciudad Guzman',
-      category: 'tec',
-      parent_community: 'tec nacional',
-      short_description: 'prueba',
-      description: 'fawfawfafawfafafa',
-    },
-    {
-      name: 'CUsur',
-      category: 'asda',
-      parent_community: 'dwada',
-      short_description: 'OwO',
-      description: 'dawdawdawdawdwafawf',
-    },
-  ]);
-  const [currentCommunity, setCurretnCommunity] = useState(communities[0])
+import * as CommunityServer from '../../data/CommunityServer'
 
+function App() {
+  const [communities, setcommunities] = useState([]);
+  const [action, setAction] = useState('submit')
+
+  const serverList = async () => {
+    try {
+      const res = await CommunityServer.listCommunities();
+      const data = await res.json()
+      setcommunities(data.communities)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const [currentCommunity, setCurretnCommunity] = useState({
+    name: '',
+    category: '',
+    parent_community: '',
+    short_description: '',
+    description: '',
+  })
+  
   const resetForm = () => {
+    setAction('submit')
     setCurretnCommunity({
       name: '',
       category: '',
@@ -32,26 +38,20 @@ function App() {
       description: '',
     })
   }
-
-  const updateComunity = (updated) => {
-    setcommunities([
-      ...communities,
-      updated
-    ])
-  }
-
+  
   const communityHandler = (value) => {
+    setAction('edit')
     setCurretnCommunity(communities[value])
   }
-
-  const deleteComunity = (value) => {
-    setcommunities([...communities.filter((_, index) => index !== value)])
-  }
+  
+  useEffect(() => {
+    serverList();
+  },[])
 
   return (
     <Styled.Container>
-      <CommunitiesList communities={communities} resetForm={resetForm} deleteComunity={deleteComunity} communityHandler={communityHandler}/>
-      <CommunitiesForm currentCommunity={currentCommunity} updateComunity={updateComunity} />
+      <CommunitiesList communities={communities} resetForm={resetForm} serverList={serverList} communityHandler={communityHandler}/>
+      <CommunitiesForm currentCommunity={currentCommunity} action={action} />
     </Styled.Container>
   );
 }
