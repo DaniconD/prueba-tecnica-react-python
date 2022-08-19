@@ -7,48 +7,38 @@ import { IoMdClose, IoMdAdd } from 'react-icons/io'
 import { MdFileCopy } from 'react-icons/md'
 import * as Styled from './CommunitiesList.styled'
 
-
-function CommunitiesList({ deleteComunity, communityHandler }) {
+function CommunitiesList({ communities, resetForm, deleteComunity, communityHandler }) {
   return (
     <Styled.Container>
       <Styled.Header>
         <h1>Communities</h1>
-        <Button onClick={() => {console.log('Clear form')}}><IoMdAdd /></Button>
+        <Button onClick={resetForm}><IoMdAdd /></Button>
       </Styled.Header>
       <ListCard>
         <ListElement>
           <h2>Name</h2>
         </ListElement>
-        <ListElement>
-          <b>Community name</b>
-          <div>
-            <Button look='delete' onClick={deleteComunity} ><IoMdClose /></Button>
-            <Button look='show' onClick={() => communityHandler('1')} ><MdFileCopy /></Button>
-          </div>
-        </ListElement>
-        <ListElement>
-          <b>Community name</b>
-          <div>
-            <Button look='delete' onClick={deleteComunity} ><IoMdClose /></Button>
-            <Button look='show' onClick={() => communityHandler('2')}><MdFileCopy /></Button>
-          </div>
-        </ListElement>
-        <ListElement>
-          <b>Community name</b>
-          <div>
-            <Button look='delete' onClick={deleteComunity} ><IoMdClose /></Button>
-            <Button look='show' onClick={() => communityHandler('adawd')}><MdFileCopy /></Button>
-          </div>
-        </ListElement>
-        <ListElement>
-          <b>Community name</b>
-          <div>
-            <Button look='delete' onClick={deleteComunity} ><IoMdClose /></Button>
-            <Button look='show' onClick={() => communityHandler(':D')} ><MdFileCopy /></Button>
-          </div>
-        </ListElement>
+        {communities.length === 0 ?
+          <ListElement>
+            <b>Add a community...</b>
+          </ListElement> 
+          : 
+          <List communities={communities} deleteComunity={deleteComunity} communityHandler={communityHandler} />
+        }
       </ListCard>
     </Styled.Container>
+  )
+}
+
+const List = ({ communities, deleteComunity, communityHandler }) => {
+  return communities.map((item, index) =>
+    <ListElement key={index}>
+      <b>{item.name}</b>
+      <div>
+        <Button look='delete' onClick={() => deleteComunity(index)} ><IoMdClose /></Button>
+        <Button look='show' onClick={() => communityHandler(index)} ><MdFileCopy /></Button>
+      </div>
+    </ListElement>
   )
 }
 

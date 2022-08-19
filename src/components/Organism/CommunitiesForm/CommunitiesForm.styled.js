@@ -84,6 +84,7 @@ export const RightFields = styled.div`
     box-shadow: 1px 5px 10px #4b4b4b;
     height: auto;
     margin-bottom: 20px;
+    margin-top: 20px;
     width: 80%;
   }
 `;
